@@ -356,7 +356,7 @@ html:not(.js) .shape{opacity:1;transform:none}
 .ba-handle{position:absolute;top:50%;left:var(--p);z-index:5;width:74px;height:86px;margin:-43px 0 0 -37px;display:grid;place-items:center;cursor:grab;touch-action:none;border-radius:40px}
 .ba-handle svg{width:74px;height:86px;filter:drop-shadow(0 12px 14px rgba(44,25,23,.35));transition:transform .4s var(--spring)}
 .ba-handle:hover svg,.ba-handle.drag svg{transform:scale(1.08)}
-.ba-mlists{display:none}
+.ba-m,.m-only{display:none}
 .ba-note{margin-top:18px;font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:flex-start;justify-content:center;text-align:left}
 .ba-note svg{width:16px;height:16px;flex:none;margin-top:2px}
 
@@ -516,24 +516,39 @@ html:not(.js) .rv-clip{clip-path:none}
   .steps::-webkit-scrollbar{display:none}
   .step,.step:nth-child(even){flex:none;width:76vw;scroll-snap-align:start;border:1px solid rgba(244,240,232,.16)!important;border-radius:22px;padding:24px}
   .step-n{margin-bottom:46px}
-  .ba{height:min(420px,108vw);border-radius:24px}
-  .ba-layer{grid-template-columns:1fr}
-  .ba-list{display:none}
-  .ba-pic{padding:12px}
-  .ba-pic .pic{border-radius:16px}
-  .ba-handle{width:84px;height:96px;margin:-48px 0 0 -42px}
-  .ba-handle svg{width:84px;height:96px}
-  .ba-mlists{display:grid;gap:10px;margin-top:12px}
-  .ba-mlists>div{position:relative;border-radius:22px;padding:60px 22px 20px}
-  .ba-mlists .ba-label{top:20px;left:20px}
-  .mb-before{background:#D8D5CE;color:#6d6a66}
-  .mb-before .ba-label{background:#8d8a85;color:#eeece8}
-  .mb-before li{padding:9px 0;border-top:1px dashed #a9a59d;font:500 16px/1.3 var(--sans)}
-  .mb-before s{text-decoration-thickness:2px}
-  .mb-after{background:var(--paper)}
-  .mb-after .ba-label{background:var(--cherry);color:var(--cream)}
-  .mb-after li{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);font:400 18px/1.25 var(--sans);letter-spacing:-.02em}
-  .mb-after li svg{width:13px;height:16px;flex:none}
+  /* antes e depois: abas no lugar do slider */
+  .ba{display:none}
+  .d-only{display:none}
+  .m-only{display:inline}
+  .ba-m{display:block}
+  .ba-tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:5px;border-radius:99px;background:var(--stone);margin-bottom:12px}
+  .ba-tabs button{position:relative;z-index:1;min-height:46px;border-radius:99px;font:600 13px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:color .4s}
+  .ba-tabs button[aria-selected=true]{color:var(--cream)}
+  .ba-tabs .dot{background:currentColor}
+  .ba-ind{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:99px;background:#8d8a85;transition:transform .55s var(--ease),background .55s}
+  .ba-m[data-v=after] .ba-ind{transform:translateX(100%);background:var(--cherry)}
+  .ba-panels{display:grid}
+  .ba-panels>div{grid-area:1/1;border-radius:24px;padding:10px 10px 20px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .45s,transform .55s var(--ease),visibility 0s .45s}
+  .ba-panels>div.on{opacity:1;visibility:visible;transform:none;transition:opacity .45s,transform .55s var(--ease)}
+  .mb-pic{position:relative;height:210px;border-radius:16px;overflow:hidden;margin-bottom:22px}
+  .mb-pic img{width:100%;height:100%;object-fit:cover}
+  .ba-panels h3{padding:0 12px;margin-bottom:12px}
+  .ba-panels ul{padding:0 12px}
+  .mb-before{background:#D8D5CE;color:#6d6a66;background-image:linear-gradient(rgba(110,106,102,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(110,106,102,.12) 1px,transparent 1px);background-size:26px 26px}
+  .mb-before .mb-pic{background:#bdb9b1}
+  .mb-before .mb-pic img{filter:grayscale(1) contrast(.82) brightness(1.04) blur(1.2px);transform:rotate(-3deg) scale(1.15)}
+  .mb-before .note{position:absolute;padding:8px 12px;background:#eceae4;font:500 13px/1.2 var(--sans);color:#6d6a66;box-shadow:0 8px 18px -10px rgba(0,0,0,.35)}
+  .mb-before .n1{top:16%;left:8%;transform:rotate(-6deg)}
+  .mb-before .n2{bottom:16%;right:8%;transform:rotate(5deg)}
+  .mb-before h3{font:700 26px/1.05 var(--sans);letter-spacing:-.04em;color:#7b7874;transform:rotate(-1deg)}
+  .mb-before li{padding:10px 0;border-top:1px dashed #a9a59d;font:500 16px/1.3 var(--sans)}
+  .mb-before s{text-decoration-thickness:2px;text-decoration-color:rgba(90,86,82,.55)}
+  .mb-after{background:linear-gradient(120deg,var(--paper) 0%,#F6EEE4 100%)}
+  .mb-after h3{font:400 30px/1.05 var(--sans);letter-spacing:-.05em}
+  .mb-after h3 .it{color:var(--cherry)}
+  .mb-after li{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line);font:500 17px/1.25 var(--sans);letter-spacing:-.02em}
+  .mb-after li .ck{width:26px;height:26px;border-radius:50%;background:var(--cherry);color:var(--cream);display:grid;place-items:center;flex:none}
+  .mb-after li .ck svg{width:13px;height:13px}
   .rev:first-child{margin-left:0}
   .rev-track{-webkit-mask-image:none;mask-image:none}
   .bento{display:flex;flex-direction:column;gap:10px;padding:10px;border-radius:26px}
@@ -547,7 +562,8 @@ html:not(.js) .rv-clip{clip-path:none}
   .cta-frame{grid-template-columns:1fr;border-radius:22px}
   .cta-copy{padding:44px 24px 40px}
   .cta-btns{flex-direction:column}
-  .cta-btns .btn,.cta-btns .btn-line{justify-content:space-between}
+  .cta-btns .btn{justify-content:space-between}
+  .cta-btns .btn-line{justify-content:center}
   .cta-photo{height:380px}
   .cta-cher{left:auto;right:18px;top:auto;bottom:250px;width:120px;display:none}
   .ftr-top{grid-template-columns:1fr 1fr}
@@ -785,7 +801,7 @@ html:not(.js) .rv-clip{clip-path:none}
     <div class="sec-head">
       <span class="label rv"><i class="dot" aria-hidden="true"></i>Antes e depois</span>
       <h2 class="h2 rv" id="ba-t">O antes e depois <span class="it r">que importa.</span></h2>
-      <p class="rv">Aqui não tem foto de corpo. Tem rotina, prato e relação com a comida. Arraste a cereja e veja a diferença.</p>
+      <p class="rv">Aqui não tem foto de corpo. Tem rotina, prato e relação com a comida. <span class="d-only">Arraste a cereja e veja a diferença.</span><span class="m-only">Toque em Depois e veja a diferença.</span></p>
     </div>
     <div class="ba rv" data-cursor="arraste">
       <div class="ba-layer ba-after" aria-label="Depois">
@@ -811,7 +827,7 @@ html:not(.js) .rv-clip{clip-path:none}
             <li><s>Dieta nova toda segunda</s></li>
             <li>Culpa depois do doce</li>
             <li><s>Pular refeição</s> e atacar a geladeira à noite</li>
-            <li>Não saber o que levar de lanche ??</li>
+            <li>Não saber o que levar de lanche</li>
           </ul>
         </div>
         <div class="ba-pic"><div class="pic">
@@ -832,9 +848,24 @@ html:not(.js) .rv-clip{clip-path:none}
         </svg>
       </div>
     </div>
-    <div class="ba-mlists">
-      <div class="mb-before"><span class="ba-label">Antes</span><ul><li><s>Dieta nova toda segunda</s></li><li>Culpa depois do doce</li><li><s>Pular refeição</s> e atacar a geladeira à noite</li><li>Não saber o que levar de lanche</li></ul></div>
-      <div class="mb-after"><span class="ba-label">Depois</span><ul><li><i class="dot" aria-hidden="true"></i>Uma rotina que cabe na semana</li><li><i class="dot" aria-hidden="true"></i>Doce sem culpa e com equilíbrio</li><li><i class="dot" aria-hidden="true"></i>Refeições organizadas e saborosas</li><li><i class="dot" aria-hidden="true"></i>Lanches planejados e práticos</li></ul></div>
+    <div class="ba-m rv" data-v="before">
+      <div class="ba-tabs" role="tablist" aria-label="Comparar antes e depois">
+        <button type="button" role="tab" id="bt-a" aria-selected="true" aria-controls="bp-a">Antes</button>
+        <button type="button" role="tab" id="bt-d" aria-selected="false" aria-controls="bp-d" tabindex="-1">Depois <i class="dot" aria-hidden="true"></i></button>
+        <i class="ba-ind" aria-hidden="true"></i>
+      </div>
+      <div class="ba-panels">
+        <div class="mb-before on" role="tabpanel" id="bp-a" aria-labelledby="bt-a">
+          <div class="mb-pic"><img src="assets/img/prato-colorido.jpg" width="1200" height="900" loading="lazy" alt="" aria-hidden="true"><span class="note n1"><s>só um café</s></span><span class="note n2">proibido: pão</span></div>
+          <h3>Dieta da moda, de novo.</h3>
+          <ul><li><s>Dieta nova toda segunda</s></li><li>Culpa depois do doce</li><li><s>Pular refeição</s> e atacar a geladeira à noite</li><li>Não saber o que levar de lanche</li></ul>
+        </div>
+        <div class="mb-after" role="tabpanel" id="bp-d" aria-labelledby="bt-d">
+          <div class="mb-pic"><img src="assets/img/prato-colorido.jpg" width="1200" height="900" loading="lazy" alt="Prato colorido com frutas, legumes e iogurte sobre mesa de madeira"></div>
+          <h3>Uma semana <span class="it">que funciona.</span></h3>
+          <ul><li><span class="ck"><svg aria-hidden="true"><use href="#check"/></svg></span>Uma rotina que cabe na semana</li><li><span class="ck"><svg aria-hidden="true"><use href="#check"/></svg></span>Doce sem culpa e com equilíbrio</li><li><span class="ck"><svg aria-hidden="true"><use href="#check"/></svg></span>Refeições organizadas e saborosas</li><li><span class="ck"><svg aria-hidden="true"><use href="#check"/></svg></span>Lanches planejados e práticos</li></ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1064,7 +1095,23 @@ html:not(.js) .rv-clip{clip-path:none}
   }
 
   /* dúvidas */
-  $$('.qa button').forEach(function(b){ b.addEventListener('click',function(){ var o=b.getAttribute('aria-expanded')!=='true'; b.setAttribute('aria-expanded',o); b.closest('.qa').classList.toggle('open',o); }); });
+  var qas=$$('.qa button');
+  qas.forEach(function(b){ b.addEventListener('click',function(){
+    var o=b.getAttribute('aria-expanded')!=='true';
+    qas.forEach(function(x){ if(x!==b){ x.setAttribute('aria-expanded','false'); x.closest('.qa').classList.remove('open'); } });
+    b.setAttribute('aria-expanded',o); b.closest('.qa').classList.toggle('open',o);
+  }); });
+
+  // antes e depois no celular: abas
+  var tabs=$$('.ba-tabs [role=tab]'), bam=$('.ba-m');
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){ selTab(i); });
+    t.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ var j=(i+1)%tabs.length; selTab(j); tabs[j].focus(); e.preventDefault(); } });
+  });
+  function selTab(i){
+    tabs.forEach(function(t,k){ t.setAttribute('aria-selected',k===i); t.tabIndex=k===i?0:-1; document.getElementById(t.getAttribute('aria-controls')).classList.toggle('on',k===i); });
+    if(bam) bam.dataset.v=i?'after':'before';
+  }
 
   /* cursor */
   if(fine && !reduce){
